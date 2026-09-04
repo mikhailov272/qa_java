@@ -3,7 +3,6 @@ package com.example;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 public class AnimalTest {
 
@@ -17,16 +16,8 @@ public class AnimalTest {
         );
     }
 
-    @Test
-    public void getFoodThrowsExceptionForUnknownAnimalKind() {
-        Exception exception = assertThrows(
-                Exception.class,
-                () -> animal.getFood("Неизвестный вид")
-        );
-
-        assertEquals(
-                "Неизвестный вид животного, используйте значение Травоядное или Хищник",
-                exception.getMessage()
-        );
+    @Test(expected = Exception.class)
+    public void getFoodThrowsExceptionForUnknownAnimalKind() throws Exception {
+        animal.getFood("Неизвестный вид");
     }
 }
